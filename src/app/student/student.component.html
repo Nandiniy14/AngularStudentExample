@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+            <label for="First Name">First Name</label>
+            <input type="text" id="firstname" class="form-control" [(ngModel)]="student.firstname" name="firstname" required>
+        </div>
+        <div class="form-group">
+            <label for="Last Name">Last Name</label>
+            <input type="text" id="lastname" class="form-control" [(ngModel)]="student.lastname" name="lastname" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" id="email" class="form-control" [(ngModel)]="student.email" name="email" required #email="ngModel">
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" [(ngModel)]="student.phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department" class="form-control" [(ngModel)]="student.department" name="department">
+              <option value="cse">Computer Science</option>
+              <option value="ece">Electronics and Communications</option>
+              <option value="it">Information and Technology</option>
+            </select>
+          </div>
+          <label> Gender:</label>
+          <div class="radio" *ngFor="let gender of genders">
+              <label>
+                <input type="radio" name="gender" [(ngModel)]="student.gender" [value]="gender" required>
+                {{ gender }}
+              </label>
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add</button>
+          <button class="btn btn-primary" type="button" (click)="onSave()" >Save</button>
+      </form>
+    </div>
+</div>
+    <hr>
+  <div class="row" >
+    <div class="col-xs-12">
+      
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Department</th>
+              <th>Gender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>{{ student.firstname }}</td>
+              <td>{{ student.lastname }}</td>
+              <td>{{ student.email }}</td>
+              <td> {{ student.phone }} </td>
+              <td>{{  student.department }}</td>
+              <td> {{ student.gender }} </td>
+              <button class="btn btn-primary" type="submit" (click)="onEdit(student)" >Modify</button>
+              <button class="btn btn-primary" type="submit" (click)="onDelete()" >Delete</button>
+            </tr>
+           
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+
+  
